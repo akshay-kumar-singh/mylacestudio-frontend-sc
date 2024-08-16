@@ -22,7 +22,7 @@ function Detailedblog({ blog }) {
     if (!currentBlog) return <div>Loading...</div>;
 
     const { Title, AuthorName, PostDate, BlogDescription, BlogImage } = currentBlog.attributes;
-    const imageUrl = baseURL + BlogImage.data.attributes.url;
+    const imageUrl = BlogImage?.data?.attributes?.url ? BlogImage.data.attributes.url : '';
 
     return (
         <>
@@ -38,7 +38,7 @@ function Detailedblog({ blog }) {
                             className="font-greatVibes text-3xl md:text-4xl lg:text-5xl text-[#791204] font-normal tracking-widest w-full md:w-5/6">{Title}</span>
                     </h1>
 
-                    <img className='w-full md:w-3/4' src={imageUrl} alt='post image' />
+                    {imageUrl && <img className='w-full md:w-3/4' src={imageUrl} alt='post image' />}
 
                     <div className="text-lg md:text-xl lg:text-2xl font-medium text-[#2B2A2AB2] pt-10 w-full md:w-9/12">
                         {BlogDescription.map((paragraph, index) => (

@@ -128,7 +128,7 @@ function Productlist() {
                             {currentProducts.map((product) => {
                                 const { id, attributes } = product;
                                 const { ProductName, ProductPrice, ProductImage, redirectURL } = attributes;
-                                const imageUrl = baseURL + ProductImage.data.attributes.url;
+                                const imageUrl = ProductImage.data?.attributes?.url ? ProductImage.data.attributes.url : '';
 
                                 return (
                                     <a key={id} href={redirectURL} target="_blank" rel="noopener noreferrer" className="group shadow-xl p-4 rounded-lg hover:cursor-pointer">
@@ -159,6 +159,7 @@ function Productlist() {
                                                     src={imageUrl}
                                                     alt={ProductName}
                                                     className="h-full w-full object-cover object-center group-hover:opacity-75"
+                                                    onError={(e) => e.target.src = '/path/to/placeholder-image.jpg'} // Placeholder image if needed
                                                 />
                                             </div>
                                         </div>

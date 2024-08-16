@@ -21,7 +21,7 @@ function Recent({ onBlogClick }) {
           <span className="text-[#791204] font-semibold text-xl">RECENT BLOG POSTS</span>
           {blogs.map((blog, index) => {
             const { Title, AuthorName, PostDate, BlogImage } = blog.attributes;
-            const imageUrl = baseURL + BlogImage.data.attributes.url;
+            const imageUrl = BlogImage?.data?.attributes?.url ? BlogImage.data.attributes.url : '';
 
             return (
               <div
@@ -30,7 +30,7 @@ function Recent({ onBlogClick }) {
                 onClick={() => onBlogClick(blog)}
               >
                 <div>
-                  <img src={imageUrl} alt="post image" />
+                  {imageUrl && <img src={imageUrl} alt="post image" />}
                 </div>
                 <span className="inline-flex font-raleway items-center justify-center px-6 py-2 text-base font-semibold text-center text-[#2B2A2A] rounded bg-[#FFF4CC80] hover:bg-gray-100 focus:ring-4 focus:ring-gray-100">
                   Fashion
