@@ -14,7 +14,7 @@ function Searchpage() {
     const [loading, setLoading] = useState(true);
 
     const productsPerPage = 2;
-    const baseURL = 'http://localhost:1337';
+    const baseURL = 'https://mylace-dashboard-strapi.onrender.com';
 
     useEffect(() => {
         axios.get(`${baseURL}/api/lace-products?populate=*`)

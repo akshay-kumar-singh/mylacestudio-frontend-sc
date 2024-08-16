@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function Detailedblog({ blog }) {
     const [currentBlog, setCurrentBlog] = useState(blog);
-    const baseURL = 'http://localhost:1337';
+    const baseURL = 'https://mylace-dashboard-strapi.onrender.com';
 
     useEffect(() => {
         if (!blog) {

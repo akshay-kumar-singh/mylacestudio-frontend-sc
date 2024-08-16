@@ -14,7 +14,7 @@ function Productlist() {
     const [loading, setLoading] = useState(true);
 
     const productsPerPage = 9;
-    const baseURL = 'http://localhost:1337'; 
+    const baseURL = 'https://mylace-dashboard-strapi.onrender.com'; 
     const totalPages = Math.ceil(products.length / productsPerPage);
     const totalProducts = products.length;
 

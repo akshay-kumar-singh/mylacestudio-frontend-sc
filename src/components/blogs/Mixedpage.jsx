@@ -6,7 +6,7 @@ import axios from 'axios';
 function Mixedpage() {
     const [selectedBlog, setSelectedBlog] = useState(null);
     const [defaultBlog, setDefaultBlog] = useState(null);
-    const baseURL = 'http://localhost:1337'; 
+    const baseURL = 'https://mylace-dashboard-strapi.onrender.com'; 
 
     useEffect(() => {
         axios.get(`${baseURL}/api/blogs?populate=*`)

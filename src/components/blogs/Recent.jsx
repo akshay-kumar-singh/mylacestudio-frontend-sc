@@ -3,7 +3,7 @@ import axios from "axios";
 
 function Recent({ onBlogClick }) {
   const [blogs, setBlogs] = useState([]);
-  const baseURL = "http://localhost:1337";
+  const baseURL = "https://mylace-dashboard-strapi.onrender.com";
 
   useEffect(() => {
     axios
