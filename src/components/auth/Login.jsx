@@ -3,13 +3,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../api';
 import { useAuth } from '../../context/AuthContext';
 import loginImage from '../../assets/loginImage.jpg';
-import eyehide from '../../assets/eyehide.png';
+// import eyehide from '../../assets/eyehide.png';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 
 function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
+  const [showPassword, setShowPassword] = useState(false); 
   const navigate = useNavigate();
   const { isAuthenticated, login: authLogin } = useAuth();
   const { email, password } = formData;
@@ -30,6 +32,10 @@ function Login() {
       setMessage(null);
       setError(error.msg || 'Login failed');
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -62,13 +68,19 @@ function Login() {
             <span className='flex flex-row relative'>
               <input
                 className='w-full font-raleway font-semibold text-base md:text-lg p-3 border-[#2B2A2A] border-4 rounded-md'
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 name="password"
                 value={password}
                 onChange={onChange}
                 placeholder='Enter your password'
               />
-              <img className='absolute right-6 top-4 z-1' src={eyehide} alt='eye' />
+              {/* <img className='absolute right-6 top-4 z-1 cursor-pointer'
+               src={showPassword ? eyeshow : eyehide}
+              alt='eye'
+              onClick={togglePasswordVisibility} /> */}
+              <span className='absolute right-6 top-4 z-1 cursor-pointer'
+              onClick={togglePasswordVisibility}
+              >{showPassword ? <AiFillEye size={24} /> : <AiFillEyeInvisible size={24} />}</span>
             </span>
           </div>
 
