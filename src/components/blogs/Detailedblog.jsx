@@ -3,6 +3,8 @@ import axios from 'axios';
 
 function Detailedblog({ blog }) {
     const [currentBlog, setCurrentBlog] = useState(blog);
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
     const baseURL = 'https://mylace-dashboard-strapi.onrender.com';
 
     useEffect(() => {
@@ -18,6 +20,16 @@ function Detailedblog({ blog }) {
             setCurrentBlog(blog);
         }
     }, [blog]);
+
+    const handleSubscribe = async () => {
+        try {
+            const response = await axios.post('https://mylace-backend-sc.onrender.com/api/subscription/subscribe', { email });
+            setMessage(response.data.msg);
+        } catch (error) {
+            console.error('Subscription Error:', error);
+            setMessage('There was an issue with your subscription. Please try again.');
+        }
+    };
 
     if (!currentBlog) return <div>Loading...</div>;
 
@@ -58,9 +70,21 @@ function Detailedblog({ blog }) {
                     </p>
 
                     <div className='flex flex-col md:flex-row justify-center items-center mt-4'>
-                        <input className='font-raleway py-2 px-4 border-4 border-black rounded' type='email' placeholder="Enter your email" name='email' />
-                        <button className='text-center bg-[#2B2A2ACC] text-white font-raleway text-xl py-2 px-4 m-4 rounded'>Subscribe</button>
+                        <input className='font-raleway py-2 px-4 border-4 border-black rounded'
+                            type='email'
+                            placeholder="Enter your email"
+                            name='email'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <button
+                            className='text-center bg-[#2B2A2ACC] text-white font-raleway text-xl py-2 px-4 m-4 rounded'
+                            onClick={handleSubscribe}
+                        >
+                            Subscribe
+                        </button>
                     </div>
+                    {message && <p className='text-center mt-4 text-lg text-green-600'>{message}</p>}
                 </div>
             </section>
         </>
