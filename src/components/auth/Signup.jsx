@@ -22,7 +22,7 @@ function Signup() {
       authLogin();
       setError(null);
       setMessage('Signup successful');
-      setTimeout(() => navigate('/login'), 2000);
+      setTimeout(() => navigate('/'), 2000);
     } catch (error) {
       setMessage(null);
       setError(error.msg || 'Signup failed');
