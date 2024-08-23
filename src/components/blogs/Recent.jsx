@@ -27,7 +27,10 @@ function Recent({ onBlogClick }) {
               <div
                 key={index}
                 className="px-4 py-10 lg:px-8 flex justify-evenly gap-6 items-start flex-col border-[#2B2A2A] shadow-md rounded-lg cursor-pointer"
-                onClick={() => onBlogClick(blog)}
+                onClick={() => {
+                  onBlogClick(blog); 
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
               >
                 <div>
                   {imageUrl && <img src={imageUrl} alt="post image" />}
