@@ -5,6 +5,7 @@ function Detailedblog({ blog }) {
     const [currentBlog, setCurrentBlog] = useState(blog);
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const [showMessage, setShowMessage] = useState(false);
     const baseURL = 'https://mylace-dashboard-strapi.onrender.com';
 
     useEffect(() => {
@@ -25,9 +26,25 @@ function Detailedblog({ blog }) {
         try {
             const response = await axios.post('https://mylace-backend-sc.onrender.com/api/subscription/subscribe', { email });
             setMessage(response.data.msg);
+            setShowMessage(true); // Show the message
+
+            // Clear the input field after successful subscription
+            setEmail('');
+
+            // Hide the message after 3 seconds
+            setTimeout(() => {
+                setShowMessage(false);
+            }, 3000);
+
         } catch (error) {
             console.error('Subscription Error:', error);
             setMessage('There was an issue with your subscription. Please try again.');
+            setShowMessage(true);
+            
+            // Hide the message after 3 seconds
+            setTimeout(() => {
+                setShowMessage(false);
+            }, 3000);
         }
     };
 
@@ -84,7 +101,7 @@ function Detailedblog({ blog }) {
                             Subscribe
                         </button>
                     </div>
-                    {message && <p className='text-center mt-4 text-lg text-green-600'>{message}</p>}
+                    {showMessage && <p className='text-center mt-4 text-lg text-green-600'>{message}</p>}
                 </div>
             </section>
         </>
