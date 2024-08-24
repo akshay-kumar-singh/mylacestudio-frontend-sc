@@ -75,28 +75,29 @@ function Productlist() {
                         </div>
                         <div className='flex flex-row justify-center items-center'>
                             <span>Sort By: </span>
-                            <div><button
-                                id="dropdownNavbarLink"
-                                onClick={toggleDropdown}
-                                className="flex items-center justify-between py-2 px-3 mx-2 rounded md:border-0 md:hover:font-bold md:p-0 font-semibold"
-                            >
-                                New Arrivals
-                                <svg
-                                    className="w-2.5 h-2.5 ms-2.5"
-                                    aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    fill="none"
-                                    viewBox="0 0 10 6"
+                            <div>
+                                <button
+                                    id="dropdownNavbarLink"
+                                    onClick={toggleDropdown}
+                                    className="flex items-center justify-between py-2 px-3 mx-2 rounded md:border-0 md:hover:font-bold md:p-0 font-semibold"
                                 >
-                                    <path
-                                        stroke="currentColor"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="m1 1 4 4 4-4"
-                                    />
-                                </svg>
-                            </button>
+                                    New Arrivals
+                                    <svg
+                                        className="w-2.5 h-2.5 ms-2.5"
+                                        aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 10 6"
+                                    >
+                                        <path
+                                            stroke="currentColor"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="m1 1 4 4 4-4"
+                                        />
+                                    </svg>
+                                </button>
                                 {isDropdownOpen && (
                                     <div
                                         id="dropdownNavbar"
@@ -128,18 +129,18 @@ function Productlist() {
                             {currentProducts.map((product) => {
                                 const { id, attributes } = product;
                                 const { ProductName, ProductPrice, ProductImage, redirectURL } = attributes;
-                                const imageUrl = ProductImage.data?.attributes?.url ? ProductImage.data.attributes.url : '';
 
                                 return (
                                     <a key={id} href={redirectURL} target="_blank" rel="noopener noreferrer" className="group shadow-xl p-4 rounded-lg hover:cursor-pointer">
                                         <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                                            <div className='flex items-start justify-end relative h-96'>
-                                                <button type="button"
+                                            <div className='relative h-96'>
+                                                <button
+                                                    type="button"
                                                     onClick={(e) => {
                                                         e.preventDefault();
                                                         toggleLike(id);
                                                     }}
-                                                    className='z-10 m-4'>
+                                                    className='absolute top-4 right-4 z-10'>
                                                     {likedProducts[id] ? (
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 47.5 47.5" id="heart">
                                                             <defs>
@@ -156,10 +157,10 @@ function Productlist() {
                                                     )}
                                                 </button>
                                                 <img
-                                                    src={imageUrl}
+                                                    src={ProductImage.data?.attributes?.url || ''}
                                                     alt={ProductName}
                                                     className="h-full w-full object-cover object-center group-hover:opacity-75"
-                                                    onError={(e) => e.target.src = '/path/to/placeholder-image.jpg'} // Placeholder image if needed
+                                                    onError={(e) => e.target.src = '/path/to/placeholder-image.jpg'} 
                                                 />
                                             </div>
                                         </div>

@@ -37,9 +37,9 @@ function Work() {
 
     const handleGetStartedClick = () => {
         if (isAuthenticated) {
-            navigate('/laceaurasearch'); 
+            navigate('/laceaurasearch');
         } else {
-            navigate('/login'); 
+            navigate('/login');
         }
     };
 
@@ -65,8 +65,8 @@ function Work() {
 
 
                 <div className='flex justify-between items-center flex-col mt-10'>
-                <button
-                        onClick={handleGetStartedClick} 
+                    <button
+                        onClick={handleGetStartedClick}
                         className="inline-flex font-raleway items-center justify-center px-10 py-3 text-base font-semibold text-center text-[#FDFDFD] border border-gray-300 rounded bg-[#2B2A2ACC] hover:bg-gray-600 focus:ring-4 focus:ring-gray-100"
                     >
                         Get Started

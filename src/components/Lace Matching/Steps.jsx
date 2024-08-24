@@ -8,7 +8,7 @@ import stepfive from '../../assets/step5.png';
 
 function Steps() {
 
-    const { isAuthenticated } = useAuth(); // Get authentication status from context
+    const { isAuthenticated } = useAuth();
     const navigate = useNavigate();
 
     const steps = [
@@ -41,11 +41,12 @@ function Steps() {
 
     const handleGetStartedClick = () => {
         if (isAuthenticated) {
-            navigate('/laceaura'); // Redirect to laceaura if logged in
+            navigate('/laceaura');
         } else {
-            navigate('/login'); // Redirect to login if not logged in
+            navigate('/login');
         }
     };
+
     return (
         <>
             <section className="mx-auto w-full max-w-screen-2xl my-10 px-10">
@@ -68,7 +69,7 @@ function Steps() {
 
 
                 <div className='flex justify-between items-center flex-col mt-10'>
-                <button
+                    <button
                         onClick={handleGetStartedClick}
                         className="inline-flex font-raleway items-center justify-center px-10 py-3 text-base font-semibold text-center text-[#FDFDFD] border border-gray-300 rounded bg-[#2B2A2ACC] hover:bg-gray-600 focus:ring-4 focus:ring-gray-100"
                     >
