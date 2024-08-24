@@ -3,8 +3,14 @@ import steptwo from '../../assets/step2.png';
 import workthree from '../../assets/work3.png';
 import workfour from '../../assets/work4.png';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function Work() {
+
+    const { isAuthenticated } = useAuth();
+    const navigate = useNavigate();
+
 
     const steps = [
         {
@@ -28,6 +34,15 @@ function Work() {
             desc: " With your personalized color palette in hand, explore our collection of sarees, lehengas, kurtis, and more—all curated to match your unique tones. Discover the ideal outfit that not only looks great but also makes you feel confident and radiant.",
         },
     ];
+
+    const handleGetStartedClick = () => {
+        if (isAuthenticated) {
+            navigate('/laceaurasearch'); 
+        } else {
+            navigate('/login'); 
+        }
+    };
+
     return (
         <>
             <section className="mx-auto w-full max-w-screen-2xl my-10 px-10">
@@ -50,9 +65,12 @@ function Work() {
 
 
                 <div className='flex justify-between items-center flex-col mt-10'>
-                    <Link to="/laceaurasearch" className="inline-flex font-raleway items-center justify-center px-10 py-3 text-base font-semibold text-center text-[#FDFDFD] border border-gray-300 rounded bg-[#2B2A2ACC] hover:bg-gray-600 focus:ring-4 focus:ring-gray-100">
+                <button
+                        onClick={handleGetStartedClick} 
+                        className="inline-flex font-raleway items-center justify-center px-10 py-3 text-base font-semibold text-center text-[#FDFDFD] border border-gray-300 rounded bg-[#2B2A2ACC] hover:bg-gray-600 focus:ring-4 focus:ring-gray-100"
+                    >
                         Get Started
-                    </Link>
+                    </button>
                 </div>
             </section>
         </>

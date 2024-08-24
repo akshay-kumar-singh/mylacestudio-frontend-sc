@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import stepone from '../../assets/step1.png';
 import steptwo from '../../assets/step2.png';
 import stepthree from '../../assets/step3.png';
@@ -6,6 +7,9 @@ import stepfour from '../../assets/step4.png';
 import stepfive from '../../assets/step5.png';
 
 function Steps() {
+
+    const { isAuthenticated } = useAuth(); // Get authentication status from context
+    const navigate = useNavigate();
 
     const steps = [
         {
@@ -34,6 +38,14 @@ function Steps() {
             desc: "Once you've made your decision, simply click to shop your favorite selection. With just a few clicks, you can make your dream ensemble a reality and embrace effortless elegance with your perfectly matched outfit.",
         },
     ];
+
+    const handleGetStartedClick = () => {
+        if (isAuthenticated) {
+            navigate('/laceaura'); // Redirect to laceaura if logged in
+        } else {
+            navigate('/login'); // Redirect to login if not logged in
+        }
+    };
     return (
         <>
             <section className="mx-auto w-full max-w-screen-2xl my-10 px-10">
@@ -56,9 +68,12 @@ function Steps() {
 
 
                 <div className='flex justify-between items-center flex-col mt-10'>
-                    <Link to="/laceaura" className="inline-flex font-raleway items-center justify-center px-10 py-3 text-base font-semibold text-center text-[#FDFDFD] border border-gray-300 rounded bg-[#2B2A2ACC] hover:bg-gray-600 focus:ring-4 focus:ring-gray-100">
+                <button
+                        onClick={handleGetStartedClick}
+                        className="inline-flex font-raleway items-center justify-center px-10 py-3 text-base font-semibold text-center text-[#FDFDFD] border border-gray-300 rounded bg-[#2B2A2ACC] hover:bg-gray-600 focus:ring-4 focus:ring-gray-100"
+                    >
                         Get Started
-                    </Link>
+                    </button>
                 </div>
             </section>
         </>
