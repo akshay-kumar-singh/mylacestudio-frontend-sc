@@ -19,10 +19,10 @@ function Signup() {
     e.preventDefault();
     try {
       await signup(email, password);
-      authLogin();
       setError(null);
-      setMessage('Signup successful');
-      setTimeout(() => navigate('/'), 2000);
+      setMessage('Signup successful. Please check your email to verify your account.');
+      // Optionally redirect after some time
+      setTimeout(() => navigate('/login'), 5000);
     } catch (error) {
       setMessage(null);
       setError(error.msg || 'Signup failed');

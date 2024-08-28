@@ -11,7 +11,7 @@ function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [error, setError] = useState(null);
   const [message, setMessage] = useState(null);
-  const [showPassword, setShowPassword] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { isAuthenticated, login: authLogin } = useAuth();
   const { email, password } = formData;
@@ -23,14 +23,24 @@ function Login() {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await login(email, password);
-      authLogin();
+      // Attempt to log in the user
+      const response = await login(email, password);
+
+      // Clear any previous errors and show success message
       setError(null);
       setMessage('Login successful');
+      
+      // Authenticate the user and redirect them
+      authLogin();
       setTimeout(() => navigate('/'), 2000);
     } catch (error) {
+      // Handle different error scenarios, especially unverified users
+      if (error === 'Please verify your email before logging in.') {
+        setError('Please verify your email before logging in.');
+      } else {
+        setError(error.msg || 'Login failed');
+      }
       setMessage(null);
-      setError(error.msg || 'Login failed');
     }
   };
 
@@ -79,7 +89,7 @@ function Login() {
               alt='eye'
               onClick={togglePasswordVisibility} /> */}
               <span className='absolute right-6 top-4 z-1 cursor-pointer'
-              onClick={togglePasswordVisibility}
+                onClick={togglePasswordVisibility}
               >{showPassword ? <AiFillEye size={24} /> : <AiFillEyeInvisible size={24} />}</span>
             </span>
           </div>
@@ -87,7 +97,10 @@ function Login() {
           {error && <p className='text-red-500'>{error}</p>}
           {message && <p className='text-green-500'>{message}</p>}
 
-          <button className='underline font-semibold text-base md:text-lg'>
+          <button
+            className='underline font-semibold text-base md:text-lg'
+            onClick={() => navigate('/forgot-password')}
+          >
             Forgot Password?
           </button>
 
