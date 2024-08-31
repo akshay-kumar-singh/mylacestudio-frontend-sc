@@ -10,6 +10,9 @@ function EmailVerification() {
 
   const baseURL = 'https://mylace-backend-sc.onrender.com';
 
+  // const baseURL  = 'http://localhost:5000';
+
+
   useEffect(() => {
     const verifyEmail = async () => {
       try {

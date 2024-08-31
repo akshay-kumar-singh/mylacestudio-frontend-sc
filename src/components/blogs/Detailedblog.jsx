@@ -24,7 +24,7 @@ function Detailedblog({ blog }) {
 
     const handleSubscribe = async () => {
         try {
-            const response = await axios.post('https://mylace-backend-sc.onrender.com/api/subscription/subscribe', { email });
+            const response = await axios.post('https://mylace-dashboard-strapi.onrender.com/api/subscription/subscribe', { email });
             setMessage(response.data.msg);
             setShowMessage(true); // Show the message
 
